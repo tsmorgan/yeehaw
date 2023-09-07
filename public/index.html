@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Yeehaw! - agile poker thing</title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="pages">
+
+      <div class="page">
+        <img src="logo.png" alt="yeehaw"/>
+        <p class="subtitle">Complexity estimation for cow folk.</p>
+      </div>
+
+      <!-- LOGIN -->
+      <div id="login" class="page section">
+        <p style="margin-bottom:1rem">What's your name <b>pardner!</b></p>
+        <form>
+          <input type="text" id="username" />
+          <button id="username_button">Submit</button>
+        </form>
+      </div>
+
+      <div id="app" class="page hidden">
+
+        <div id="user" class="section">
+          <p>Playing as: <span id="name"></span></p>
+        </div>        
+
+        <div id="poker" class="section">
+          <div class="card-container card-row">
+            {% set fibs = [1,2,3,5,8,13] %}
+            {% for i in fibs -%}
+              <div class="card">
+                <div class="card-front">            
+                  <h2>{{ i }}</h2>
+                </div>
+                <div class="card-back">
+                  <h2>{{ i }}</h2>
+                </div>
+              </div>
+            {%- endfor %}
+          </div>
+        </div>
+
+        <div id="users2" class="section results">      
+          <div id="table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Votes</th>
+                </tr>
+              </thead>
+              <tbody id="users" class="white-text">
+                <tr> <td>Tom</td> <td>1</td> </tr>
+                <tr> <td>Bob</td> <td>2</td> </tr>
+                <tr> <td>Welch</td> <td>5</td> </tr>
+              </tbody>
+            </table>
+          </div>
+          <div id="analysis">
+            <table>
+              <tr class="underline">
+                <td>Voted</td>
+                <td id="a_num" class="white-text">3</td>    
+              </tr>
+              <tr>
+                <td>Highest</td>
+                <td id="a_high" class="white-text">5</td>            
+              </tr>
+              <tr class="underline">
+                <td>Lowest</td>
+                <td id="a_low" class="white-text">1</td>
+              </tr>
+              <tr>
+                <td>Range</td>            
+                <td id="a_ran" class="white-text">4</td>
+              </tr>
+              <tr>
+                <td>Average</td>
+                <td id="a_ave" class="white-text">3</td>
+              </tr>
+              <tr>
+                <td>Median</td>
+                <td id="a_med" class="white-text">4</td>
+              </tr>
+            </table>            
+          </div>
+        </div>
+
+        <div class="section">
+          <a id="reset_link" href="#">reset</a>
+        </div>
+
+      </div>
+      <!-- /#app .page -->
+
+    </div>
+    <!-- .pages -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash-core@4.17.19/distrib/lodash-core.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
