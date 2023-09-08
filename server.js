@@ -15,6 +15,7 @@ nunjucks.configure('public', {
 })
 
 let users = [];
+let hidden = false;
 
 app.get('/', (req, res) => {
   console.log('got here');
@@ -38,7 +39,7 @@ io.on('connection', (socket) => {
     const i = _.findIndex(users, { id: socket.id });
     if (i !== -1) {
       users.splice(i, 1)[0];
-      io.sockets.emit('users', users);
+      io.sockets.emit('users', users,hidden);
     }
   });  
 
@@ -48,7 +49,7 @@ io.on('connection', (socket) => {
   socket.on('new user', (msg) => {
     console.log('new user: ', msg, socket.id);
     users.push({name:msg, id:socket.id});
-    io.sockets.emit('users', users);
+    io.sockets.emit('users', users,hidden);
   });
 
   /**
@@ -57,7 +58,7 @@ io.on('connection', (socket) => {
   socket.on('choice', (num) => {
     const user = _.find(users, { id: socket.id });
     if (user) user.choice = num;
-    io.sockets.emit('users', users);
+    io.sockets.emit('users', users,hidden);
   });
 
   /**
@@ -68,8 +69,16 @@ io.on('connection', (socket) => {
     _.forEach(users, (obj) => {
       obj.choice = undefined;
     });
-    io.sockets.emit('users', users);
+    io.sockets.emit('users', users,hidden);
   });
+
+   /**
+   * when click triggers reset
+   */
+    socket.on('toggle', (hide) => {
+      hidden = !hidden;
+      io.sockets.emit('users', users, hidden);
+    });
 
 });
 

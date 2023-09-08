@@ -18,6 +18,14 @@ img {
   width:100%;
   max-width:512px;
 }
+/**
+  ––––– BUTTTONS ––––
+*/
+.buttons {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 a {
   display: inline-block;
   position: relative;
@@ -42,10 +50,11 @@ a:active {
   margin: 10px auto 14px auto;
   border-bottom: 0;
 }
+
+
 form {
   margin-bottom:16px;
 }
-
 .pages {
   display: flex;
   flex-direction: column;
@@ -74,13 +83,14 @@ thead th {
   border-bottom: 1px solid black; /* Add a black border beneath the th elements */
   font-weight:300;
 }
-td { padding:4px 8px; }
+td,th { padding:4px 8px; }
 #analysis tr td:nth-child(2) { 
   text-align:center;
 }
 tr.underline{
   border-bottom: 1px solid black; /* Add a black border beneath the th elements */
 }
+th.vote, td.vote {text-align:center}
 #analysis {
   font-size:1em;
 }
@@ -169,6 +179,5 @@ tr.underline{
 @media screen and (max-width: 600px) {
   body {
     font-size:16px; 
-    background-color:red;
   }
 }

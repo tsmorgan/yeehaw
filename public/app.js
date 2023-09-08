@@ -6,13 +6,17 @@ socket.on('disconnect', () => console.log("———disconnected") );
 /**
  * When server updates the array of users
  */
-socket.on('users', users => {
+socket.on('users', (users,hidden) => {
 
-  console.log('users:', users);
+  var button_text = (hidden) ? "show" : 'hide';
+  $('#hide_link span').text(button_text);
+
+  // console.log('users:', users);
   var content = '';
   users.forEach(el => { 
+    const num = (hidden) ? 'X' : el.choice ;
     content += "<tr><td>"+el.name;
-    if (el.choice) content += '</td><td>'+el.choice;
+    if (el.choice) content += '</td><td class="vote">'+num;
     content += "<tr></td>";
   });
   $("#users").html(content);
@@ -30,9 +34,14 @@ socket.on('users', users => {
   $("#a_num").text(analysed.count+'/'+users.length);
   $("#a_high").text(analysed.max);
   $("#a_low").text(analysed.min);
-  $("#a_ran").text(analysed.range);
-  $("#a_ave").text(analysed.mean.toFixed(1));
-  $("#a_med").text(analysed.median.toFixed(1));
+  $("#a_ran").text(analysed.range);  
+  $("#a_ave").text(checkNum(analysed.mean));
+  $("#a_med").text(checkNum(analysed.median));
+
+  function checkNum(num) {
+    if (isNaN(num)) return '';
+    else return Math.round(num,2);
+  }
 
 });
 
@@ -79,6 +88,15 @@ $(document).on("ready", function () {
     console.log("reset click");
   });
 
+  /**
+   * when user clicks to hide or show
+   */
+  $("#hide_link").click(function (e) { 
+    e.preventDefault();
+    socket.emit('toggle');
+    console.log("hide toggle click");
+  });
+
 }); // end - jquery doc ready
 
 /**
@@ -105,8 +123,8 @@ function setName(un)
 function analyzeNumbers(numbers) {
   if (!Array.isArray(numbers) || numbers.length === 0) {
     return {
-      median: '',
-      mean: '',
+      median: 'blah',
+      mean: 'blah',
       min: '',
       max: '',
       sum: '',
@@ -118,7 +136,6 @@ function analyzeNumbers(numbers) {
 
   // Sort the numbers in ascending order
   const sortedNumbers = [...numbers].sort((a, b) => a - b);
-  console.log(sortedNumbers);
   const count = sortedNumbers.length;
   const sum = sortedNumbers.reduce((acc, num) => acc + num, 0);
   const median =

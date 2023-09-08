@@ -47,19 +47,19 @@
           </div>
         </div>
 
-        <div id="users2" class="section results">      
+        <div class="section results">      
           <div id="table">
             <table>
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Votes</th>
+                  <th class="vote">Vote</th>
                 </tr>
               </thead>
               <tbody id="users" class="white-text">
-                <tr> <td>Tom</td> <td>1</td> </tr>
-                <tr> <td>Bob</td> <td>2</td> </tr>
-                <tr> <td>Welch</td> <td>5</td> </tr>
+                <tr> <td>Tom</td>   <td class="vote">1</td> </tr>
+                <tr> <td>Bob</td>   <td class="vote">2</td> </tr>
+                <tr> <td>Welch</td> <td class="vote">5</td> </tr>
               </tbody>
             </table>
           </div>
@@ -94,7 +94,10 @@
         </div>
 
         <div class="section">
-          <a id="reset_link" href="#">reset</a>
+          <div class="buttons">
+            <a id="hide_link" href="#"><span>hide</span> votes</a>
+            <a id="reset_link" href="#">reset</a>            
+          </div>
         </div>
 
       </div>
