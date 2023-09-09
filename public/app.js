@@ -97,6 +97,16 @@ $(document).on("ready", function () {
     console.log("hide toggle click");
   });
 
+  var admin = ['hide admin','show admin'];
+  $("#admin").click(function (e) { 
+    e.preventDefault();
+    $("#admin_functions").toggleClass("hidden");
+    const a = $(this).find("a");
+    console.log(a);
+    if ($(a).text() == admin[0]) $(a).text(admin[1]);
+    else $(a).text(admin[0]);
+  });
+
 }); // end - jquery doc ready
 
 /**

@@ -26,7 +26,7 @@ img {
   flex-direction: row;
   justify-content: space-between;
 }
-a {
+a.button {
   display: inline-block;
   position: relative;
   margin: 10px auto;
@@ -36,21 +36,28 @@ a {
   border-right: 0;
   border-bottom: 4px solid #D10587;
   border-left: 0;
-  border-radius: 5px;
+  border-radius: 4px;
   background-color: #FB5CC1;
   outline: none;
   cursor: pointer;
   text-decoration: none;
 }
-a:hover {
-  background-color: darken(#FB5CC1, 5);
+a.button:hover {
+  background-color: #ff6eca;
 }
-a:active {
+a.button:active {
   top: 4px;
   margin: 10px auto 14px auto;
   border-bottom: 0;
 }
-
+#admin {
+  text-align:center;
+}
+a.link {
+  font-size:1rem;
+  font-weight:300;
+  
+}
 
 form {
   margin-bottom:16px;
@@ -119,6 +126,7 @@ th.vote, td.vote {text-align:center}
   padding:16px 24px;
   margin:16px 0;
   border:8px solid #fff;
+  border-radius: 16px;
 }
 /**
   * All the cards stuff
@@ -161,7 +169,7 @@ th.vote, td.vote {text-align:center}
   justify-content: center;
   align-items: center;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .card-front {
@@ -172,6 +180,10 @@ th.vote, td.vote {text-align:center}
 .card-back {
   transform: rotateY(180deg);
   background-color:#FB5CC1;
+  color:white;
+}
+.card-back h2 {
+  font-weight:300;
 }
 
 .hidden { display:none }
